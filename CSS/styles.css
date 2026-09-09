@@ -1,0 +1,209 @@
+﻿/* ============================================================
+   EVALUACIÓN DE VULNERABILIDAD SANITARIA — ProControl México
+   Estilos globales
+   ============================================================ */
+
+/* --- Variables CSS --- */
+:root {
+    --bg-1: #020b16;
+    --bg-2: #061827;
+    --panel: rgba(15, 23, 42, 0.78);
+    --panel-soft: rgba(15, 23, 42, 0.58);
+    --panel-strong: rgba(9, 16, 26, 0.96);
+    --border-soft: rgba(148, 163, 184, 0.22);
+    --border-strong: rgba(59, 130, 246, 0.32);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --sky: #38bdf8;
+    --sky-strong: #0ea5e9;
+    --cyan: #22d3ee;
+    --emerald: #34d399;
+    --amber: #fbbf24;
+    --shadow-soft: 0 20px 50px rgba(2, 6, 23, 0.35);
+}
+
+/* --- Base --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 26%),
+        radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 22%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 58%, #020b16 100%);
+    color: var(--text);
+}
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.28s ease-out forwards;
+}
+
+@keyframes questionEnter {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.quiz-question-enter {
+    animation: questionEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Utilidades --- */
+.pulse-glow {
+    box-shadow: 0 0 20px -5px rgba(2, 132, 199, 0.4);
+}
+
+/* --- Opciones del cuestionario (CUMPLE / NO CUMPLE / etc.) --- */
+.quiz-option {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.quiz-option:hover {
+    transform: translateY(-2px);
+}
+
+.quiz-option:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.quiz-option-active {
+    box-shadow: 0 10px 30px -8px rgba(2, 6, 23, 0.6);
+}
+
+/* --- Barra de progreso del cuestionario --- */
+#quiz-progress-fill {
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+}
+
+/* --- Paneles / Cards --- */
+.shell-panel,
+[class*='bg-slate-900'][class*='rounded-2xl'],
+[class*='bg-slate-900'][class*='rounded-xl'],
+[class*='border-slate-700'][class*='rounded-2xl'],
+[class*='border-slate-700'][class*='rounded-xl'] {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#dual-path-selector > button,
+#path-direct-section > div,
+#privacy-modal > div {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.83) 0%, rgba(8, 15, 24, 0.92) 100%);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+}
+
+/* --- Selector de Rutas --- */
+#dual-path-selector > button {
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    border-width: 1px;
+}
+
+#dual-path-selector > button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.55);
+    box-shadow: 0 22px 45px rgba(14, 165, 233, 0.12);
+}
+
+#dual-path-selector > button .w-12 {
+    background: rgba(14, 165, 233, 0.09);
+    border-color: rgba(56, 189, 248, 0.25);
+}
+
+/* --- Formularios --- */
+input, select, textarea, button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+input, select, textarea {
+    background: rgba(2, 6, 23, 0.75) !important;
+    border: 1px solid rgba(148, 163, 184, 0.25) !important;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.18);
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: rgba(56, 189, 248, 0.72) !important;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
+}
+
+button {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+/* --- Responsive Mobile --- */
+@media (max-width: 640px) {
+    header .max-w-6xl {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    header .sm\:flex {
+        gap: 0.4rem;
+    }
+
+    header .sm\:flex > span {
+        font-size: 9px;
+        padding-left: 0.6rem;
+        padding-right: 0.6rem;
+    }
+
+    main section {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+
+    h1 {
+        letter-spacing: -0.04em;
+    }
+
+    #dual-path-selector {
+        gap: 0.85rem;
+    }
+
+    #path-direct-section .grid,
+    #path-quiz-section .grid {
+        gap: 0.85rem !important;
+    }
+}
+
+/* --- Impresión / PDF --- */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    /* Sin esto, el navegador descarta fondos y gradientes al imprimir
+       (píldoras, banner de riesgo, tarjetas de puntaje quedan en blanco). */
+    #printable-modal-wrapper, #printable-modal-wrapper * {
+        visibility: visible;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    #printable-modal-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+}

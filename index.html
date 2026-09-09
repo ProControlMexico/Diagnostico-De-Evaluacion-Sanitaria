@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Vulnerabilidad Sanitaria | NMX-F-605-NORMEX / NOM-251-SSA1 | ProControl México</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Header Institucional -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="#" onclick="location.reload()" class="flex items-center gap-2">
+                    <img src="./Imagenes/Logo Procontrol Vectores.png" alt="ProControl México" class="h-9 md:h-11 w-auto object-contain">
+                </a>
+            </div>
+
+            <div class="hidden sm:flex items-center gap-2">
+                <span class="bg-emerald-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 shrink-0">
+                    <i class="fa-solid fa-check text-xs"></i> NMX-F-610-NORMEX
+                </span>
+                <span class="bg-slate-800 text-white border border-slate-700 text-[11px] font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
+                    <i class="fa-solid fa-check text-xs"></i> ISO 9001:2015
+                </span>
+                <span class="bg-slate-800 text-white border border-slate-700 text-[11px] font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
+                    <i class="fa-solid fa-check text-xs"></i> ISO 14001:2015
+                </span>
+                <span class="bg-slate-800 text-white border border-slate-700 text-[11px] font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
+                    <i class="fa-solid fa-check text-xs"></i> ISO 45001:2018
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="max-w-4xl mx-auto px-4 py-3 md:py-5">
+            <!-- Hero Title & Subtitle -->
+            <div id="hero-main" class="text-center mb-3">
+                <img src="./Imagenes/Logo Procontrol Vectores.png" alt="ProControl México Logo" class="h-10 md:h-14 w-auto mx-auto mb-3 object-contain filter drop-shadow-lg">
+                <span class="inline-flex items-center gap-2 text-[9px] md:text-[10px] font-extrabold uppercase tracking-widest text-sky-400 bg-sky-950/80 border border-sky-800/60 px-3 py-1.25 rounded-full mb-2 shadow-inner">
+                    Evaluación con base en NMX-F-605-NORMEX / NOM-251-SSA1
+                </span>
+                <h1 class="text-3xl md:text-[3.35rem] font-black text-white tracking-tight leading-[0.9] mb-2">
+                    Evaluación de <span class="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">Vulnerabilidad Sanitaria</span>
+                </h1>
+                <p class="text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed mb-0">
+                    Identifica en tiempo real los <strong>puntos de cero tolerancia</strong>, nivel de riesgo operativo y grado de cumplimiento técnico en tus instalaciones ante inspecciones sanitarias oficiales.
+                </p>
+            </div>
+
+            <!-- Selector de Dos Rutas (Dual-Path) -->
+            <div id="dual-path-selector" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-3">
+                <!-- Tarjeta 1: Visita Presencial -->
+                <button type="button" id="tab-direct-btn" onclick="setActivePath('direct')" class="group p-3.5 rounded-2xl bg-slate-900/80 border-2 border-slate-700 text-left transition-all duration-300 hover:border-sky-400 focus:outline-none relative overflow-hidden">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 text-base group-hover:scale-110 transition shrink-0">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-extrabold text-sky-400 uppercase tracking-wider mb-0.5">Ruta 1 &middot; Cobertura Oficial</div>
+                            <h3 class="text-sm md:text-base font-bold text-white mb-0.5">Agendar Inspección en Sitio</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Verificación presencial por un especialista técnico en tu plaza.</p>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Tarjeta 2: Autodiagnóstico Digital -->
+                <button type="button" id="tab-quiz-btn" onclick="setActivePath('quiz')" class="group p-3.5 rounded-2xl bg-slate-900/80 border-2 border-slate-700 text-left transition-all duration-300 hover:border-blue-400 focus:outline-none relative overflow-hidden">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-base group-hover:scale-110 transition shrink-0">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-extrabold text-blue-400 uppercase tracking-wider mb-0.5">Ruta 2 &middot; Digital Express</div>
+                            <h3 class="text-sm md:text-base font-bold text-white mb-0.5">Autodiagnóstico en Línea</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Cuestionario técnico con dictamen preliminar y semáforo de riesgo oficial.</p>
+                        </div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- SECCIÓN RUTA 1: FORMULARIO DE INSPECCIÓN PRESENCIAL -->
+            <div id="path-direct-section" class="hidden animate-fadeIn">
+                <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-4 md:p-6 shadow-2xl">
+                    <div class="max-w-2xl mx-auto mb-4 text-center">
+                        <span class="text-[10px] md:text-xs font-bold text-emerald-400 uppercase tracking-wider bg-emerald-950/80 border border-emerald-800/60 px-3 py-1 rounded-full">
+                            Atención Técnica Presencial
+                        </span>
+                        <h2 class="text-xl md:text-2xl font-black text-white mt-2 mb-1">Coordinar Levantamiento Físico en Sitio</h2>
+                        <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
+                            Completa los datos de tu establecimiento. Un especialista técnico con Licencia Sanitaria coordinará la visita en tu plaza autorizada.
+                        </p>
+                    </div>
+
+                    <form id="direct-visit-form" onsubmit="handleDirectFormSubmit(event)" class="space-y-3 max-w-2xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Nombre de la Empresa o Inmueble *</label>
+                                <input type="text" id="direct-company" required placeholder="Ej. Restaurante El Portón" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Nombre del Responsable *</label>
+                                <input type="text" id="direct-name" required placeholder="Ej. Ing. Carlos Mendoza" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Tipo de Establecimiento *</label>
+                                <select id="direct-sector" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition font-medium">
+                                    <option value="">Selecciona el tipo de establecimiento...</option>
+                                    <option value="Restaurante (Casual / Formal / A la carta)">Restaurante (Casual / Formal / A la carta)</option>
+                                    <option value="Fast Food / Comida Rápida">Fast Food / Comida Rápida</option>
+                                    <option value="Dark Kitchen / Cocina Oculta (Delivery)">Dark Kitchen / Cocina Oculta (Solo Delivery)</option>
+                                    <option value="Bistro / Cafetería / Bar">Bistro / Cafetería / Bar</option>
+                                    <option value="Taquería / Pizzería / Snacks">Taquería / Pizzería / Snacks</option>
+                                    <option value="Comedor Industrial / Corporativo / Escolar">Comedor Industrial / Corporativo / Escolar</option>
+                                    <option value="Panadería / Pastelería / Repostería">Panadería / Pastelería / Repostería</option>
+                                    <option value="Hotel / Banquetes y Catering">Hotel / Banquetes y Catering</option>
+                                    <option value="Planta Procesadora / Empacadora de Alimentos">Planta Procesadora / Empacadora de Alimentos</option>
+                                    <option value="Otro giro de Alimentos y Bebidas">Otro giro de Alimentos y Bebidas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Ciudad / Plaza de Cobertura *</label>
+                                <select id="direct-city" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition font-medium">
+                                    <option value="">Selecciona tu plaza autorizada...</option>
+                                    <option value="CDMX y Área Metropolitana">CDMX y Área Metropolitana</option>
+                                    <option value="Yucatán (Mérida)">Yucatán (Mérida)</option>
+                                    <option value="Querétaro">Querétaro</option>
+                                    <option value="Guadalajara (ZMG)">Guadalajara (ZMG)</option>
+                                    <option value="Chihuahua">Chihuahua</option>
+                                    <option value="Tijuana">Tijuana</option>
+                                    <option value="Tapachula">Tapachula</option>
+                                </select>
+                                <p id="direct-city-error" class="hidden text-rose-400 text-xs mt-1.5 font-medium">
+                                    <i class="fa-solid fa-triangle-exclamation"></i> Nuestro servicio técnico presencial está limitado exclusivamente a las 7 zonas metropolitanas listadas.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Teléfono / WhatsApp *</label>
+                                    <span id="direct-phone-counter" class="text-[11px] font-mono text-slate-400">0/10 dígitos</span>
+                                </div>
+                                <input 
+                                    type="tel" 
+                                    id="direct-phone" 
+                                    required 
+                                    maxlength="10"
+                                    inputmode="numeric"
+                                    oninput="cleanPhoneInput(this, 'direct-phone-counter', 'direct-phone-error')"
+                                    placeholder="10 dígitos numéricos continuos" 
+                                    class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                                <p id="direct-phone-error" class="hidden text-rose-400 text-xs mt-1.5 font-medium flex items-center gap-1">
+                                    <i class="fa-solid fa-circle-exclamation"></i> Se requieren exactamente 10 dígitos numéricos sin espacios.
+                                </p>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Correo Electrónico <span class="text-slate-500 font-normal lowercase">(opcional)</span></label>
+                                <input type="email" id="direct-email" placeholder="correo@empresa.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Comentarios o Inquietudes Específicas (Opcional)</label>
+                            <textarea id="direct-notes" rows="2" placeholder="Detalles sobre el inmueble, presencia reciente de fauna o fecha de auditoría prevista..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition"></textarea>
+                        </div>
+
+                        <!-- Candado Legal / Aviso de Privacidad -->
+                        <div class="bg-slate-950 border border-slate-800 p-3.5 rounded-xl flex items-start gap-3">
+                            <input type="checkbox" id="direct-privacy-check" onchange="toggleDirectSubmitBtn(this)" class="mt-1 w-4 h-4 rounded border-slate-700 text-sky-500 focus:ring-sky-500 focus:ring-offset-slate-900 cursor-pointer">
+                            <label for="direct-privacy-check" class="text-xs text-slate-300 leading-relaxed cursor-pointer">
+                                He leído y acepto el <button type="button" onclick="openPrivacyModal()" class="text-sky-400 underline font-bold hover:text-sky-300">Aviso de Privacidad</button>. Mis datos serán utilizados exclusivamente para coordinar el diagnóstico técnico (cero spam).
+                            </label>
+                        </div>
+
+                        <button type="submit" id="direct-submit-btn" disabled class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-extrabold uppercase tracking-wider py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 opacity-50 cursor-not-allowed">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> Confirmar y Enviar Solicitud por WhatsApp
+                        </button>
+                    </form>
+
+                    <!-- Mensaje de confirmación en pantalla si regresa de WhatsApp -->
+                    <div id="direct-success-modal" class="hidden text-center py-8 space-y-4 max-w-lg mx-auto">
+                        <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">¡Solicitud Registrada con Éxito!</h3>
+                        <p class="text-xs text-slate-300">Tu información ha sido registrada. Si no se abrió WhatsApp en automático, haz clic a continuación:</p>
+                        <button type="button" onclick="openDirectWhatsApp()" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Abrir Chat de WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN RUTA 2: AUTODIAGNÓSTICO EXPRESS EN LÍNEA -->
+            <div id="path-quiz-section" class="hidden">
+                <!-- STEP 1: PREGUNTAS INTERACTIVAS (UNO A LA VEZ) -->
+                <div id="quiz-step-engine">
+                    <!-- Barra de Progreso Dinámica -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-7 shadow-lg">
+                        <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-3">
+                            <span id="quiz-module-indicator" class="inline-flex items-center gap-2 text-sky-400 uppercase tracking-wider">
+                                <i class="fa-solid fa-clipboard-list"></i> Pregunta 1 de 36
+                            </span>
+                            <span id="quiz-progress-percent" class="font-mono text-slate-300">3% Completado</span>
+                        </div>
+                        <div class="w-full bg-slate-950 rounded-full h-3 overflow-hidden border border-slate-800">
+                            <div id="quiz-progress-fill" class="bg-gradient-to-r from-sky-500 to-blue-600 h-3 rounded-full" style="width: 3%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor dinámico de la pregunta -->
+                    <div id="quiz-questions-container"></div>
+
+                    <!-- Navegación -->
+                    <div class="flex justify-between items-center mt-5">
+                        <button type="button" id="quiz-prev-btn" onclick="prevQuestion()" class="hidden text-xs font-bold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-4 py-3 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-chevron-left"></i> Anterior
+                        </button>
+                        <div class="flex-grow"></div>
+                        <button type="button" id="quiz-next-btn" onclick="nextQuestion()" class="group text-xs font-bold text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 px-6 py-3 rounded-xl transition flex items-center gap-2 shadow-lg shadow-sky-950/50">
+                            Siguiente <i class="fa-solid fa-chevron-right transition group-hover:translate-x-0.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: CAPTURA DE LEAD PARA DESBLOQUEAR EL DICTAMEN -->
+                <div id="quiz-step-lead-capture" class="hidden animate-fadeIn text-center">
+                    <div class="max-w-xl mx-auto mb-4">
+                        <span class="inline-flex items-center gap-2 text-[10px] md:text-xs font-black uppercase tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-3 py-1.5 rounded-full mb-2 shadow-inner">
+                            <i class="fa-solid fa-check-circle"></i> Evaluación Técnica Concluida
+                        </span>
+                        <h2 class="text-2xl md:text-3xl font-black text-white mb-1.5 leading-tight">Desbloquear Dictamen de Vulnerabilidad</h2>
+                        <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                            Ingresa los datos de tu establecimiento para calcular en tiempo real el semáforo de riesgo y generar el dictamen técnico conforme a NMX-F-605-NORMEX / NOM-251-SSA1.
+                        </p>
+                    </div>
+
+                    <form onsubmit="handleLeadCaptureSubmit(event)" class="space-y-3 max-w-lg mx-auto bg-slate-900/90 border border-slate-700 p-4 md:p-6 rounded-2xl shadow-2xl text-left">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Nombre de la Empresa o Instalación *</label>
+                            <input type="text" id="quiz-company-input" required placeholder="Ej. Restaurante El Portón / Bodega Norte" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Nombre del Responsable *</label>
+                            <input type="text" id="quiz-name-input" required placeholder="Ej. Ing. Carlos Mendoza" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Ciudad / Plaza de Cobertura *</label>
+                            <select id="quiz-city-input" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition font-medium">
+                                <option value="">Selecciona tu plaza autorizada...</option>
+                                <option value="CDMX y Área Metropolitana">CDMX y Área Metropolitana</option>
+                                <option value="Yucatán (Mérida)">Yucatán (Mérida)</option>
+                                <option value="Querétaro">Querétaro</option>
+                                <option value="Guadalajara (ZMG)">Guadalajara (ZMG)</option>
+                                <option value="Chihuahua">Chihuahua</option>
+                                <option value="Tijuana">Tijuana</option>
+                                <option value="Tapachula">Tapachula</option>
+                            </select>
+                            <p id="quiz-city-error" class="hidden text-rose-400 text-xs mt-1.5 font-medium">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Nuestro servicio técnico presencial está limitado exclusivamente a las 7 zonas metropolitanas listadas.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Teléfono / WhatsApp *</label>
+                                <span id="quiz-phone-counter" class="text-[11px] font-mono text-slate-400">0/10 dígitos</span>
+                            </div>
+                            <input 
+                                type="tel" 
+                                id="quiz-phone-input" 
+                                required 
+                                maxlength="10"
+                                inputmode="numeric"
+                                oninput="cleanPhoneInput(this, 'quiz-phone-counter', 'quiz-phone-error')"
+                                placeholder="10 dígitos numéricos continuos" 
+                                class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                            <p id="quiz-phone-error" class="hidden text-rose-400 text-xs mt-1.5 font-medium flex items-center gap-1">
+                                <i class="fa-solid fa-circle-exclamation"></i> Se requieren exactamente 10 dígitos numéricos sin espacios.
+                            </p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Correo Electrónico <span class="text-slate-500 font-normal lowercase">(opcional)</span></label>
+                            <input type="email" id="quiz-email-input" placeholder="correo@empresa.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition">
+                        </div>
+
+                        <!-- Candado Legal / Aviso de Privacidad -->
+                        <div class="bg-slate-950 border border-slate-800 p-3.5 rounded-xl flex items-start gap-3">
+                            <input type="checkbox" id="quiz-privacy-check" onchange="toggleQuizSubmitBtn(this)" class="mt-1 w-4 h-4 rounded border-slate-700 text-sky-500 focus:ring-sky-500 focus:ring-offset-slate-900 cursor-pointer">
+                            <label for="quiz-privacy-check" class="text-xs text-slate-300 leading-relaxed cursor-pointer">
+                                He leído y acepto el <button type="button" onclick="openPrivacyModal()" class="text-sky-400 underline font-bold hover:text-sky-300">Aviso de Privacidad</button>. Mis datos serán utilizados exclusivamente para coordinar el diagnóstico técnico (cero spam).
+                            </label>
+                        </div>
+
+                        <button type="submit" id="quiz-submit-btn" disabled class="w-full bg-gradient-to-r from-sky-600 to-blue-600 text-white font-extrabold uppercase tracking-wider py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 opacity-50 cursor-not-allowed mt-2">
+                            <i class="fa-solid fa-chart-pie"></i> Desbloquear Dictamen de Vulnerabilidad
+                        </button>
+                    </form>
+                </div>
+
+                <!-- STEP 3: RESULTADOS Y DICTAMEN MEMBRETADO (BLINDADO - SIN FUGA DE DETALLES TÉCNICOS) -->
+                <div id="quiz-step-results" class="hidden">
+                    <div class="text-center mb-4">
+                        <span class="text-[10px] md:text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-950 px-3 py-1 rounded-full border border-sky-800">Dictamen Sanitario</span>
+                        <h2 class="text-2xl font-black text-white mt-2 mb-1">Informe de Vulnerabilidad Sanitaria</h2>
+                    </div>
+
+                    <!-- Ficha de Datos Jerárquica a la Izquierda -->
+                    <div class="bg-slate-900 border border-slate-700/80 rounded-xl p-4 mb-4 max-w-2xl mx-auto space-y-2 text-xs text-left shadow-lg">
+                        <div class="text-sky-400 font-extrabold uppercase tracking-wider text-[11px] mb-3 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-building text-sky-400"></i> Datos del Establecimiento Evaluado
+                        </div>
+                        <div class="text-slate-300"><strong class="text-white font-semibold">Empresa / Instalación:</strong> <span id="res-company-val" class="text-slate-100 font-bold"></span></div>
+                        <div class="text-slate-300"><strong class="text-white font-semibold">Responsable Técnico:</strong> <span id="res-name-val" class="text-slate-100"></span></div>
+                        <div class="text-slate-300"><strong class="text-white font-semibold">Plaza / Ciudad:</strong> <span id="res-city-val" class="text-sky-400 font-bold"></span></div>
+                        <div class="text-slate-300"><strong class="text-white font-semibold">Teléfono / WhatsApp:</strong> <span id="res-phone-val" class="text-slate-100"></span></div>
+                        <div class="text-slate-300"><strong class="text-white font-semibold">Correo Electrónico:</strong> <span id="res-email-val" class="text-slate-100"></span></div>
+                    </div>
+
+                    <!-- Tarjetas de Calificación Cuantitativa -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                        <div class="bg-slate-900 border border-slate-700 rounded-xl p-4 text-center">
+                            <span class="text-[11px] font-extrabold uppercase text-slate-400 tracking-wider block mb-1">
+                                Puntos Críticos (Req. 100%) *
+                            </span>
+                            <div id="res-critical-val" class="text-3xl font-black text-red-500">0 / 10</div>
+                            <span class="text-[10px] text-slate-500 block mt-1">Cumplimiento en puntos de cero tolerancia</span>
+                        </div>
+
+                        <div class="bg-slate-900 border border-slate-700 rounded-xl p-5 text-center">
+                            <span class="text-[11px] font-extrabold uppercase text-slate-400 tracking-wider block mb-1">
+                                Puntos Generales (Req. 90%)
+                            </span>
+                            <div id="res-general-val" class="text-3xl font-black text-sky-400">0%</div>
+                            <span class="text-[10px] text-slate-500 block mt-1">Porcentaje ajustado (Excluyendo N/A)</span>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Semáforo de Riesgo -->
+                    <div id="res-status-banner" class="rounded-xl p-3.5 text-center font-black text-xs md:text-sm uppercase tracking-wider mb-4 border">
+                    </div>
+
+                    <!-- Alcance Normativo Visible -->
+                    <div class="bg-slate-900/90 border border-amber-600/40 rounded-xl p-3.5 mb-4 text-left flex items-start gap-3 shadow-inner">
+                        <i class="fa-solid fa-shield-halved text-amber-400 text-lg shrink-0 mt-0.5"></i>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            <strong class="text-amber-300 uppercase tracking-wide block mb-1">Alcance Normativo:</strong>
+                            Este dictamen representa una evaluación preliminar de carácter informativo. Conforme a las normas <strong>NMX-F-605-NORMEX</strong> y <strong>NOM-251-SSA1</strong>, la validez técnica ante auditorías e inspecciones requiere la verificación física en sitio por parte de personal técnico con Licencia Sanitaria Federal.
+                        </p>
+                    </div>
+
+                    <!-- Llamado a la Acción Principal hacia WhatsApp -->
+                    <div class="space-y-3 mb-4">
+                        <button type="button" onclick="sendReportToWhatsApp()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-black py-4 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-950/60 transform active:scale-98">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> Solicitar Levantamiento y Plan de Acción en Sitio
+                        </button>
+
+                        <button type="button" onclick="executeDirectPdfDownload()" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-red-400 text-base"></i> Descargar Informe PDF
+                        </button>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-800 text-center">
+                        <p class="text-xs text-slate-400">
+                            Plaza asignada para atención presencial: <strong id="res-city-badge" class="text-sky-400"></strong>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Integral: Aviso de Privacidad (LFPDPPP) -->
+    <div id="privacy-modal" class="fixed inset-0 z-[99999] bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl">
+            <div class="flex items-center justify-between p-5 border-b border-slate-800">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-user-shield text-sky-400 text-lg"></i>
+                    <h3 class="text-base font-bold text-white">Aviso de Privacidad Integral</h3>
+                </div>
+                <button type="button" onclick="closePrivacyModal()" class="text-slate-400 hover:text-white text-lg p-1 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
+                <p>
+                    En cumplimiento con la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong>, se informa lo siguiente:
+                </p>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <h4 class="text-sky-400 font-bold uppercase tracking-wider text-[11px]">1. Identidad y Domicilio del Responsable</h4>
+                    <p>
+                        <strong>Profesionales en Servicios de Control y Manejo de Plagas S. de R.L. de C.V. (ProControl México)</strong>, con domicilio corporativo en Atizapán de Zaragoza, Estado de México, y cobertura operativa a nivel nacional en sus plazas autorizadas, es responsable del tratamiento legítimo y confidencial de sus datos personales.
+                    </p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <h4 class="text-sky-400 font-bold uppercase tracking-wider text-[11px]">2. Finalidades del Tratamiento</h4>
+                    <p>
+                        Los datos personales recopilados (Nombre del responsable, Empresa, Plaza/Ciudad, Teléfono de contacto y Correo electrónico) serán utilizados con el propósito exclusivo de:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-400">
+                        <li>Emitir el dictamen preliminar y semáforo de riesgo técnico conforme a las normas <strong>NMX-F-605-NORMEX</strong> y <strong>NOM-251-SSA1</strong>.</li>
+                        <li>Coordinar y agendar la inspección técnica presencial en sitio dentro de las plazas de cobertura autorizadas.</li>
+                        <li>Dar seguimiento comercial directo y oportuno a los requerimientos sanitarios de su inmueble.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <h4 class="text-emerald-400 font-bold uppercase tracking-wider text-[11px]">3. Compromiso de Cero Spam y No Transferencia</h4>
+                    <p>
+                        ProControl México declara expresamente que sus datos personales <strong>NO serán vendidos, transferidos, compartidos ni cedidos a terceros ajenos</strong> a la empresa bajo ninguna circunstancia. No practicamos spam ni envío masivo no autorizado de publicidad.
+                    </p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <h4 class="text-sky-400 font-bold uppercase tracking-wider text-[11px]">4. Ejercicio de Derechos ARCO</h4>
+                    <p>
+                        Usted tiene derecho de Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales, así como revocar el consentimiento otorgado. Para ejercer cualquiera de estos derechos, podrá enviar una solicitud por escrito al correo electrónico: <strong class="text-white">contacto@procontrolmexico.com</strong> indicando el nombre de su establecimiento y teléfono registrado.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 text-right bg-slate-950/60">
+                <button type="button" onclick="closePrivacyModal()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition">
+                    Entendido y Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Institucional de la Landing Page -->
+    <footer class="bg-[#071924] border-t border-sky-900/40 text-slate-400 py-10 px-4 text-xs mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-5">
+                <div id="footer-escudo-wrapper" class="flex items-center justify-center">
+                    <img 
+                        id="footer-escudo-img"
+                        src="./Imagenes/Escudo Procontrol.png" 
+                        alt="Escudo ProControl" 
+                        class="h-32 w-auto object-contain drop-shadow-md">
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm tracking-wide">PROFESIONALES EN CONTROL Y MANEJO DE PLAGAS</h4>
+                    <p class="text-[11px] text-slate-400">Licencia Sanitaria Federal COFEPRIS: No. 2011-15A023</p>
+                    <p class="text-[11px] text-slate-400">Certificado NMX-F-610-NORMEX: No. 013/SDCP/CP</p>
+                </div>
+            </div>
+
+            <div class="flex items-center">
+                <div id="footer-qr-wrapper" class="flex items-center justify-center">
+                    <img 
+                        id="footer-qr-img"
+                        src="./Imagenes/QR Procontrol.png" 
+                        alt="QR ProControl" 
+                        class="h-28 w-28 bg-white p-2 rounded-xl object-contain shadow-lg">
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto text-center mt-6 pt-4 border-t border-slate-800 text-[10px] text-slate-500">
+            &copy; 2026 ProControl México. Todos los derechos reservados. Cobertura en CDMX, Querétaro, Mérida, Guadalajara, Chihuahua, Tijuana y Tapachula.
+        </div>
+    </footer>
+
+    <!-- MODAL DE VISTA PREVIA E IMPRESIÓN DEL PDF (ALTO CONTRASTE - FONDO BLANCO) -->
+    <div id="printable-modal-wrapper" class="fixed inset-0 z-[99998] bg-slate-950/95 backdrop-blur-md hidden overflow-y-auto p-2 sm:p-4 md:p-8">
+        <div class="max-w-3xl mx-auto bg-white text-slate-900 rounded-2xl shadow-2xl p-5 sm:p-8 relative">
+            <div class="no-print flex items-center justify-between pb-4 mb-4 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-red-600 text-lg"></i>
+                    <h3 class="font-bold text-sm sm:text-base text-slate-900">Vista Oficial del Dictamen Técnico</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="executeNativePrint()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
+                    </button>
+                    <button type="button" onclick="executeDirectPdfDownload()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-download"></i> Descargar
+                    </button>
+                    <button type="button" onclick="closePDFPreviewModal()" class="text-slate-400 hover:text-slate-700 text-lg p-1.5 transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenedor del documento oficial -->
+            <div id="printable-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Indicador de Carga PDF -->
+    <div id="pdf-loading-overlay" class="fixed inset-0 z-[99999] bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center">
+        <div class="bg-slate-900 border border-slate-700 p-6 rounded-2xl text-center space-y-3 shadow-2xl">
+            <i class="fa-solid fa-circle-notch fa-spin text-sky-400 text-3xl"></i>
+            <p class="text-xs font-bold text-white uppercase tracking-wider">Generando Informe PDF...</p>
+        </div>
+    </div>
+
+    
+    
+
+<script src="js/main.js"></script>
+</body>
+</html>
